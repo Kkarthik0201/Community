@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>IIT Roorkee Departments - Professors Directory</title>
+<style>
+body { font-family: Arial, sans-serif; background: #f4f4f4; margin:0;}
+header {
+  display: flex; align-items: center; background:#002147; color:#fff;
+  padding: 14px 32px 14px 18px; font-size:22px; font-weight:bold;
+  letter-spacing:.9px;
+}
+.menu-bar {
+  display: flex; align-items: center; gap: 26px; padding-left: 26px;
+}
+.menu-bar a {
+  color: #fff; text-decoration: none; font-size:17px; font-weight:bold;
+  margin-right:10px; cursor:pointer; padding: 7px 13px;
+  border-radius: 5px; transition: background 0.1s;
+}
+.menu-bar a:hover, .menu-bar a.active { background: #143a6f; }
+.popup {
+  position: absolute; background: #fff; border-radius: 9px;
+  box-shadow: 0 4px 18px rgba(0,0,0,0.16); padding: 13px 0 17px 0;
+  z-index: 20; min-width: 240px; margin-top: 6px;
+}
+.popup ul, .vertical-popup ul { list-style:none; margin:0; padding:0;}
+.popup li {
+  cursor:pointer; font-size:15px; padding:11px 28px;
+  border-radius:7px; transition: background .13s;}
+.popup li:hover { background:#f3f5fa;}
+.vertical-popup {
+  position:absolute; background:#fff;
+  border-radius:9px; box-shadow: 0 4px 18px rgba(0,0,0,0.16);
+  z-index:30; min-width:210px; padding:14px 0; display:none;
+}
+.vertical-popup ul { margin:0;}
+.vertical-popup li {
+  cursor:pointer; font-size:15px; padding:11px 22px;
+  border-radius:7px; transition: background .13s;}
+.vertical-popup li:hover { background:#f3f5fa;}
+.prof-grid-container {
+  width:100vw; min-height:92vh; background:#f8f9fc;
+  display:flex; flex-direction:column; align-items:center; margin:0; padding:0;
+}
+.prof-grid-header { font-size:2rem; padding:38px 0 26px 0; color:#19325d; font-weight:bold;}
+.prof-grid-search {
+  max-width:600px; width:100%; margin-bottom:28px; display:flex; gap:12px;
+}
+.prof-grid-search input {
+  flex:1; padding:11px 18px; border-radius:8px; border:1px solid #bbb; font-size:16px;
+}
+.prof-grid-search button {
+  padding:10px 24px; background:#a61c30; color:#fff; border:none; border-radius:9px;
+  font-weight:bold; cursor:pointer; font-size:15px;
+}
+.prof-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(215px, 1fr));
+  gap: 32px;
+  width: 98vw;
+  max-width:1170px;
+  margin:0 auto 44px auto;
+}
+.prof-card {
+  background: #fff;
+  border-radius: 13px;
+  box-shadow: 0 2px 10px rgba(0,0,0,.08);
+  padding: 26px 15px 18px 15px;
+  text-align: center;
+  display: flex; flex-direction:column; align-items:center; min-height:200px;
+  transition: box-shadow .15s;
+}
+.prof-card:hover {
+  box-shadow: 0 4px 18px rgba(166,28,48,0.09);
+}
+.prof-card h4 { margin:0 0 6px 0; font-size:18px; color:#a61c30;}
+.prof-card p { margin:0 0 4px 0; color:#272727; font-size:15px;}
+.card-info { color:#555; font-size:14px; margin-bottom:2px;}
+.map-container { margin-top:20px; border-radius:11px; overflow:hidden; box-shadow:0 1px 9px rgba(0,0,0,0.09);}
+.lab-card {
+  background:#f8f9fa; border-radius:8px; padding:13px 18px;
+  margin-bottom:14px; box-shadow: 0 1px 4px rgba(0,0,0,0.07);
+}
+.lab-card h4 { margin:0 0 4px 0; font-size:16px;}
+.lab-card p { margin:0; font-size:14px;}
+.about-panel { margin: 38px auto 0 auto; max-width:540px; background:#fff; border-radius:15px; box-shadow:0 2px 16px rgba(0,0,0,0.10); padding:32px 38px 39px 38px;}
+.list-panel {
+  margin: 44px auto 0 auto; max-width:540px; background:#fff;
+  border-radius: 15px; box-shadow: 0 2px 16px rgba(0,0,0,0.10);
+  padding:32px 38px 39px 38px;
+}
+.list-header { font-size:21px; font-weight:bold; color:#174b77; margin-bottom:16px; }
+</style>
+</head>
+<body>
+<header>
+  <span>IIT Roorkee</span>
+  <nav class="menu-bar">
+    <a id="homeLink" class="active" onclick="goHome()">Home</a>
+    <a id="departmentsLink" onclick="showDepartmentsPopup(event)">Departments</a>
+    <a id="aboutLink" onclick="showAbout()">About</a>
+  </nav>
+</header>
+<div id="mainContent"></div>
+<div id="popupDept" class="popup" style="display:none;">
+  <ul id="deptListUL"></ul>
+</div>
+<div id="popupVertical" class="vertical-popup">
+  <ul>
+    <li onclick="showProfessors()">Professors</li>
+    <li onclick="showLaboratories()">Laboratories</li>
+    <li onclick="showMap()">Map</li>
+  </ul>
+</div>
+<script>
+let departments = [
+  { id: "CSE", title: "Computer Science & Engineering", desc: "Artificial Intelligence, Data Science, Systems Research." },
+  { id: "ECE", title: "Electronics & Communication Engineering", desc: "VLSI Design, Communication Systems, and Signal Processing." },
+  { id: "EE", title: "Electrical Engineering", desc: "Power Systems, Control, Renewable Energy." }
+];
+
+let profs = {
+  "CSE": [
+    { name: "Bala", room: "CS12", email: "bala@iitroorkee.ac.in", phone: "1332-900901" },
+    { name: "Satish", room: "CS18", email: "satish@iitroorkee.ac.in", phone: "1332-900902" },
+    { name: "Sparsh", room: "CS32", email: "sparsh@iitroorkee.ac.in", phone: "1332-900903" },
+    { name: "Mittal", room: "CS45", email: "mittal@iitroorkee.ac.in", phone: "1332-900904" }
+  ],
+  "ECE": [
+    { name: "Saurabh Khanna", room: "S312", email: "saurabh.khanna@iitroorkee.ac.in", phone: "1332-111111" },
+    { name: "Vinodh Pankajakshan", room: "N214", email: "vinodh@iitroorkee.ac.in", phone: "1332-222222" },
+    { name: "Sudeb Das Gupta", room: "B126", email: "sudeb@iitroorkee.ac.in", phone: "1332-333333" },
+    { name: "Meenaksi Rawat", room: "S210", email: "meenakshi.rawat@iitroorkee.ac.in", phone: "1332-444444" },
+    { name: "Tharun Kumar Reddy", room: "N201", email: "tharun.kumar@iitroorkee.ac.in", phone: "1332-555555" },
+    { name: "Akhilesh Kumar", room: "M105", email: "akhilesh.kumar@iitroorkee.ac.in", phone: "1332-666666" },
+    { name: "Anand Bulusu", room: "L209", email: "anand.bulusu@iitroorkee.ac.in", phone: "1332-777777" },
+    { name: "Bishnu Prasad Das", room: "S410", email: "bishnu.das@iitroorkee.ac.in", phone: "1332-888888" }
+  ],
+  "EE": [
+    { name: "Aranab Dey", room: "EE14", email: "aranab@iitroorkee.ac.in", phone: "1332-110800" },
+    { name: "Dhibakar", room: "EE18", email: "dhibakar@iitroorkee.ac.in", phone: "1332-110801" }
+  ]
+};
+
+let labs = {
+  "CSE": [ { name:"Machine Learning Lab" }, { name:"Data Science Lab" }, { name:"Software Systems Lab" } ],
+  "ECE": [ { name:"Embedded Systems Lab" }, { name:"VLSI Design Lab" }, { name:"Communication Systems Lab" } ],
+  "EE": [ { name:"Power Systems Lab" }, { name:"Control & Automation Lab" }, { name:"Renewable Energy Lab" } ]
+};
+
+let deptInfo = {
+  "CSE": { desc:"Artificial Intelligence, Data Science, and Systems Research.", map: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3424.1126903509557!2d77.89353707542862!3d29.864893774438314!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390ead12e6f14f4d%3A0xd3c2a263bff1ca03!2sIIT%20Roorkee!5e0!3m2!1sen!2sin!4v1708702751312!5m2!1sen!2sin" },
+  "ECE": { desc:"VLSI Design, Communication Systems, and Signal Processing.", map: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3424.1126903509557!2d77.89353707542862!3d29.864893774438314!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390ead12e6f14f4d%3A0xd3c2a263bff1ca03!2sIIT%20Roorkee!5e0!3m2!1sen!2sin!4v1708702751312!5m2!1sen!2sin" },
+  "EE": { desc:"Power Systems, Control, and Renewable Energy.", map: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3424.1126903509557!2d77.89353707542862!3d29.864893774438314!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390ead12e6f14f4d%3A0xd3c2a263bff1ca03!2sIIT%20Roorkee!5e0!3m2!1sen!2sin!4v1708702751312!5m2!1sen!2sin" }
+};
+
+let selectedDept = "";
+let currentListType = "";
+
+function goHome() {
+  selectedDept = "";
+  currentListType = "";
+  closePopups();
+  document.getElementById('homeLink').classList.add('active');
+  document.getElementById('departmentsLink').classList.remove('active');
+  document.getElementById('aboutLink').classList.remove('active');
+  let html = `<div class="list-panel"><div class="list-header">Departments at IIT Roorkee</div>`;
+  departments.forEach(dept => {
+    html += `<div class="dept-card"><h2>${dept.title}</h2><p>${dept.desc}</p></div>`;
+  });
+  html += `</div>`;
+  document.getElementById('mainContent').innerHTML = html;
+}
+function showAbout() {
+  closePopups();
+  document.getElementById('aboutLink').classList.add('active');
+  document.getElementById('homeLink').classList.remove('active');
+  document.getElementById('departmentsLink').classList.remove('active');
+  document.getElementById('mainContent').innerHTML =
+    `<div class="about-panel"><h2>About IIT Roorkee</h2><p>IIT Roorkee is a premier institute in India, renowned for research, innovation, and excellence in engineering, science, and technology. Explore our departments, faculty, labs and campus.</p></div>`;
+}
+function showDepartmentsPopup(event) {
+  closePopups();
+  document.getElementById('departmentsLink').classList.add('active');
+  document.getElementById('homeLink').classList.remove('active');
+  document.getElementById('aboutLink').classList.remove('active');
+  let el = document.getElementById('popupDept');
+  let ul = document.getElementById('deptListUL');
+  ul.innerHTML = "";
+  departments.forEach(dept => {
+    ul.innerHTML += `<li onclick="selectDepartmentPopup(event, '${dept.id}')">${dept.title}</li>`;
+  });
+  let rect = event.target.getBoundingClientRect();
+  el.style.left = (rect.left) + "px";
+  el.style.top = (rect.bottom + window.scrollY) + "px";
+  el.style.display = "block";
+}
+function selectDepartmentPopup(event, deptId) {
+  selectedDept = deptId;
+  const deptItemRect = event.target.getBoundingClientRect();
+  const deptPopupRect = document.getElementById('popupDept').getBoundingClientRect();
+  let popup = document.getElementById('popupVertical');
+  popup.style.left = (deptPopupRect.right + 8) + "px";
+  popup.style.top = (deptItemRect.top + window.scrollY) + "px";
+  popup.style.display = "block";
+}
+function showProfessors() {
+  currentListType = "prof";
+  document.getElementById('popupVertical').style.display = "none";
+  let html = `<div class="prof-grid-container">
+    <div class="prof-grid-header">Professors in ${selectedDept}</div>
+    <div class="prof-grid-search">
+      <input type="text" id="searchProf" placeholder="Search Professor..." oninput="filterProfessors()" />
+      <button onclick="refreshProfessors()">Refresh</button>
+    </div>
+    <div id="profGrid"></div>
+    </div>`;
+  document.getElementById('mainContent').innerHTML = html;
+  renderProfGrid("");
+}
+function filterProfessors() {
+  let q = document.getElementById('searchProf').value.trim().toLowerCase();
+  renderProfGrid(q);
+}
+function renderProfGrid(query) {
+  let profArr = profs[selectedDept] || [];
+  let cards = "";
+  profArr.forEach(p => {
+    let txt = (p.name + " " + p.email + " " + (p.phone||"") + " " + (p.room||"")).toLowerCase();
+    if (!query || txt.includes(query)) {
+      cards += `
+        <div class="prof-card">
+          <h4>${p.name}</h4>
+          <div class="card-info">Room: ${p.room||"-"}</div>
+          <div class="card-info">Email: ${p.email}</div>
+          <div class="card-info">Phone: ${p.phone}</div>
+        </div>
+      `;
+    }
+  });
+  document.getElementById('profGrid').className = "prof-grid";
+  document.getElementById('profGrid').innerHTML = cards || "<p>No results found.</p>";
+}
+function refreshProfessors() {
+  renderProfGrid(document.getElementById('searchProf').value.trim().toLowerCase());
+}
+function showLaboratories() {
+  currentListType = "lab";
+  document.getElementById('popupVertical').style.display = "none";
+  let html = `<div class="list-panel"><div class="list-header">Laboratories in ${selectedDept}</div>
+    <div class="list-search"><input type="text" id="searchLab" placeholder="Search Laboratory..." oninput="filterLabs()" />
+    <button onclick="refreshLabs()">Refresh</button></div><div id="labListCards"></div></div>`;
+  document.getElementById('mainContent').innerHTML = html;
+  renderLabCards("");
+}
+function filterLabs() {
+  let q = document.getElementById('searchLab').value.trim().toLowerCase();
+  renderLabCards(q);
+}
+function renderLabCards(query) {
+  let cards = "";
+  (labs[selectedDept]||[]).forEach(l => {
+    let txt = l.name;
+    if (!query || txt.toLowerCase().includes(query)) {
+      cards += `<div class="lab-card"><h4>${l.name}</h4></div>`;
+    }
+  });
+  document.getElementById('labListCards').innerHTML = cards || "<p>No results found.</p>";
+}
+function refreshLabs() {
+  renderLabCards(document.getElementById('searchLab').value.trim().toLowerCase());
+}
+function showMap() {
+  currentListType = "map";
+  document.getElementById('popupVertical').style.display = "none";
+  let info = deptInfo[selectedDept];
+  let html = `<div class="list-panel"><div class="list-header">Map: ${selectedDept}</div>
+    <div class="map-container"><iframe src="${info.map}" width="100%" height="210" frameborder="0" style="border:0;" allowfullscreen="" loading="lazy"></iframe></div></div>`;
+  document.getElementById('mainContent').innerHTML = html;
+}
+function closePopups() {
+  document.getElementById('popupDept').style.display = "none";
+  document.getElementById('popupVertical').style.display = "none";
+}
+document.body.addEventListener('mousedown', function(e) {
+  if (!e.target.closest('.popup') && !e.target.closest('.vertical-popup') && !e.target.closest('.menu-bar')) {
+    closePopups();
+  }
+});
+goHome();
+</script>
+</body>
+</html>
