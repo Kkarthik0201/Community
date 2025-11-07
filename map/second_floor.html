@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>ECE Department – 2nd Floor</title>
+  <link rel="stylesheet" href="map_style.css">
+</head>
+<body>
+  <header class="app-header">
+    <h1 class="app-title">ECE Department – 2nd Floor</h1>
+    <div class="search-wrap">
+      <input id="roomSearch" class="search-input" type="text" placeholder="Search (e.g., S-310, Shabhaz Khan, Image Lab)">
+      <ul id="suggestions" class="suggestions"></ul>
+    </div>
+  </header>
+
+  <main class="map-container">
+    <svg id="eceMap" class="ece-map" viewBox="0 0 1200 700" xmlns="http://www.w3.org/2000/svg">
+      <title>ECE Department – 2nd Floor</title>
+
+      <!-- === Outer Boundary (1080×620 area) === -->
+      <rect x="60" y="40" width="1080" height="620"
+            fill="none" stroke="var(--grid)" stroke-dasharray="4 6" opacity="0.3"/>
+
+      <!-- === Corridor (centerline) === -->
+      <rect x="80" y="350" width="1040" height="40"
+            fill="rgba(56,189,248,0.05)" stroke="var(--grid)" stroke-dasharray="3 5" opacity="0.6"/>
+
+      <!-- ========== TOP ROW (fills width with slight right gap and bigger 320–319 gap) ========== -->
+      <g id="topRow">
+        <!-- Each room width ~150px, except final offset -->
+        <g transform="translate(80,100)">
+          <rect id="S-304" class="room" width="145" height="100" rx="8"/>
+          <text x="72" y="40" class="room-label small" text-anchor="middle">S-304</text>
+          <text x="72" y="66" class="room-sub tiny" text-anchor="middle">Network Security</text>
+        </g>
+
+        <g transform="translate(225,100)">
+          <rect id="S-307" class="room" width="145" height="100" rx="8"/>
+          <text x="72" y="40" class="room-label small" text-anchor="middle">S-307</text>
+          <text x="72" y="66" class="room-sub tiny" text-anchor="middle">Design Automation</text>
+        </g>
+
+        <g transform="translate(370,100)">
+          <rect id="S-309" class="room" width="145" height="100" rx="8"/>
+          <text x="72" y="40" class="room-label small" text-anchor="middle">S-309</text>
+          <text x="72" y="66" class="room-sub tiny" text-anchor="middle">IC Testing</text>
+        </g>
+
+        <g transform="translate(515,100)">
+          <rect id="S-311" class="room" width="145" height="100" rx="8"/>
+          <text x="72" y="40" class="room-label small" text-anchor="middle">S-311</text>
+          <text x="72" y="66" class="room-sub tiny" text-anchor="middle">Abhay</text>
+        </g>
+
+        <g transform="translate(660,100)">
+          <rect id="S-313" class="room" width="145" height="100" rx="8"/>
+          <text x="72" y="40" class="room-label small" text-anchor="middle">S-313</text>
+          <text x="72" y="66" class="room-sub tiny" text-anchor="middle">Opto Electronics</text>
+        </g>
+
+        <g transform="translate(805,100)">
+          <rect id="S-320" class="room" width="145" height="100" rx="8"/>
+          <text x="72" y="40" class="room-label small" text-anchor="middle">S-320</text>
+        </g>
+
+        <!-- Increased gap: +25px between S-320 and S-319 -->
+        <g transform="translate(975,100)">
+          <rect id="S-319" class="room" width="130" height="100" rx="8"/>
+          <text x="65" y="40" class="room-label small" text-anchor="middle">S-319</text>
+          <text x="65" y="66" class="room-sub tiny" text-anchor="middle">Saravana</text>
+        </g>
+      </g>
+
+      <!-- ========== BOTTOM ROW (fills boundary, no gaps) ========== -->
+      <g id="bottomRow">
+        <g transform="translate(80,520)">
+          <rect id="S-306" class="room" width="108" height="90" rx="8"/>
+          <text x="54" y="35" class="room-label small" text-anchor="middle">S-306</text>
+          <text x="54" y="60" class="room-sub tiny" text-anchor="middle">InfoSec Lab</text>
+        </g>
+
+        <g transform="translate(188,520)">
+          <rect id="S-308A" class="room" width="108" height="90" rx="8"/>
+          <text x="54" y="35" class="room-label small" text-anchor="middle">S-308</text>
+          <text x="54" y="60" class="room-sub tiny" text-anchor="middle">Shabhaz Khan</text>
+        </g>
+
+        <g transform="translate(296,520)">
+          <rect id="S-308B" class="room" width="108" height="90" rx="8"/>
+          <text x="54" y="35" class="room-label small" text-anchor="middle">S-308</text>
+          <text x="54" y="60" class="room-sub tiny" text-anchor="middle">Partha Roy</text>
+        </g>
+
+        <g transform="translate(404,520)">
+          <rect id="S-308C" class="room" width="108" height="90" rx="8"/>
+          <text x="54" y="35" class="room-label small" text-anchor="middle">S-308</text>
+          <text x="54" y="60" class="room-sub tiny" text-anchor="middle">Rahul Thakur</text>
+        </g>
+
+        <g transform="translate(512,520)">
+          <rect id="S-310A" class="room" width="108" height="90" rx="8"/>
+          <text x="54" y="35" class="room-label small" text-anchor="middle">S-310</text>
+          <text x="54" y="60" class="room-sub tiny" text-anchor="middle">Sandeep K. Singh</text>
+        </g>
+
+        <g transform="translate(620,520)">
+          <rect id="S-310B" class="room" width="108" height="90" rx="8"/>
+          <text x="54" y="35" class="room-label small" text-anchor="middle">S-317</text>
+          <text x="54" y="60" class="room-sub tiny" text-anchor="middle">Priyansha Kaurav</text>
+        </g>
+
+        <g transform="translate(728,520)">
+          <rect id="S-310C" class="room" width="108" height="90" rx="8"/>
+          <text x="54" y="35" class="room-label small" text-anchor="middle">S-310</text>
+          <text x="54" y="60" class="room-sub tiny" text-anchor="middle">Ashish Chowdhary</text>
+        </g>
+
+        <g transform="translate(836,520)">
+          <rect id="S-312" class="room" width="108" height="90" rx="8"/>
+          <text x="54" y="35" class="room-label small" text-anchor="middle">S-312</text>
+          <text x="54" y="60" class="room-sub tiny" text-anchor="middle">RF Char</text>
+        </g>
+
+        <g transform="translate(944,520)">
+          <rect id="S-314" class="room" width="108" height="90" rx="8"/>
+          <text x="54" y="35" class="room-label small" text-anchor="middle">S-314</text>
+          <text x="54" y="60" class="room-sub tiny" text-anchor="middle">Image Lab</text>
+        </g>
+
+        <g transform="translate(1052,520)">
+          <rect id="S-316" class="room" width="88" height="90" rx="8"/>
+          <text x="44" y="35" class="room-label small" text-anchor="middle">S-316</text>
+          <text x="44" y="60" class="room-sub tiny" text-anchor="middle">Wireless</text>
+        </g>
+      </g>
+
+      <!-- Pointer -->
+      <g id="pointer" class="pointer" visibility="hidden">
+        <circle r="10" cx="0" cy="0" class="pointer-core"/>
+        <circle r="20" cx="0" cy="0" class="pointer-pulse"/>
+      </g>
+    </svg>
+  </main>
+
+  <footer class="app-footer">
+    <span>Tip: Try searching any room number or professor name.</span>
+  </footer>
+
+  <script src="map_script.js"></script>
+</body>
+</html>

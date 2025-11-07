@@ -1,1 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>ECE Department – 1st Floor</title>
+  <link rel="stylesheet" href="map_style.css">
+</head>
+<body>
+  <header class="app-header">
+    <h1 class="app-title">ECE Department – 1st Floor</h1>
+    <div class="search-wrap">
+      <input id="roomSearch" class="search-input" type="text"
+             placeholder="Search (e.g., S-210A, Gowrish, IoT Lab)">
+      <ul id="suggestions" class="suggestions"></ul>
+    </div>
+  </header>
 
+  <main class="map-container">
+    <svg id="eceMap" class="ece-map" viewBox="0 0 1200 700" xmlns="http://www.w3.org/2000/svg">
+      <title>ECE Department – 1st Floor</title>
+
+      <!-- === Outer Boundary (1080×620) === -->
+      <rect x="60" y="40" width="1080" height="620"
+            fill="none" stroke="var(--grid)" stroke-dasharray="4 6" opacity="0.3"/>
+
+      <!-- === Corridor === -->
+      <rect x="80" y="350" width="1040" height="40"
+            fill="rgba(56,189,248,0.05)" stroke="var(--grid)"
+            stroke-dasharray="3 5" opacity="0.6"/>
+
+      <!-- ========== TOP ROW (perfectly within boundary) ========== -->
+      <g id="topRow">
+        <g transform="translate(80,100)">
+          <rect id="S-205" class="room" width="88" height="90" rx="8"/>
+          <text x="44" y="38" class="room-label small" text-anchor="middle">S-205</text>
+          <text x="44" y="62" class="room-sub tiny" text-anchor="middle">Sandeep K. Garg</text>
+        </g>
+
+        <g transform="translate(168,100)">
+          <rect id="S-207" class="room" width="88" height="90" rx="8"/>
+          <text x="44" y="38" class="room-label small" text-anchor="middle">S-207</text>
+          <text x="44" y="62" class="room-sub tiny" text-anchor="middle">Gowrish</text>
+        </g>
+
+        <g transform="translate(256,100)">
+          <rect id="S-209" class="room" width="88" height="90" rx="8"/>
+          <text x="44" y="38" class="room-label small" text-anchor="middle">S-209</text>
+          <text x="44" y="62" class="room-sub tiny" text-anchor="middle">Sourjeet Roy</text>
+        </g>
+
+        <g transform="translate(344,100)">
+          <rect id="S-211" class="room" width="88" height="90" rx="8"/>
+          <text x="44" y="38" class="room-label small" text-anchor="middle">S-211</text>
+          <text x="44" y="62" class="room-sub tiny" text-anchor="middle">Rajdeep Niyogi</text>
+        </g>
+
+        <g transform="translate(432,100)">
+          <rect id="S-213" class="room" width="88" height="90" rx="8"/>
+          <text x="44" y="38" class="room-label small" text-anchor="middle">S-213</text>
+          <text x="44" y="62" class="room-sub tiny" text-anchor="middle">Manoj Misra</text>
+        </g>
+
+        <g transform="translate(520,100)">
+          <rect id="S-215" class="room" width="88" height="90" rx="8"/>
+          <text x="44" y="38" class="room-label small" text-anchor="middle">S-215</text>
+          <text x="44" y="62" class="room-sub tiny" text-anchor="middle">Saurabh Khanna</text>
+        </g>
+
+        <g transform="translate(608,100)">
+          <rect id="S-217" class="room" width="88" height="90" rx="8"/>
+          <text x="44" y="38" class="room-label small" text-anchor="middle">S-217</text>
+          <text x="44" y="62" class="room-sub tiny" text-anchor="middle">Dheeraj Kumar</text>
+        </g>
+
+        <g transform="translate(696,100)">
+          <rect id="S-223" class="room" width="88" height="90" rx="8"/>
+          <text x="44" y="38" class="room-label small" text-anchor="middle">S-223</text>
+          <text x="44" y="62" class="room-sub tiny" text-anchor="middle">Amita Ghiri</text>
+        </g>
+
+        <!-- Corridor gap -->
+        <g transform="translate(812,100)">
+          <rect width="40" height="90" fill="none"/>
+        </g>
+
+        <g transform="translate(852,100)">
+          <rect id="S-225" class="room" width="88" height="90" rx="8"/>
+          <text x="44" y="38" class="room-label small" text-anchor="middle">S-225</text>
+          <text x="44" y="62" class="room-sub tiny" text-anchor="middle">S. Gangopadhyay</text>
+        </g>
+
+        <g transform="translate(940,100)">
+          <rect id="S-227" class="room" width="88" height="90" rx="8"/>
+          <text x="44" y="38" class="room-label small" text-anchor="middle">S-227</text>
+          <text x="44" y="62" class="room-sub tiny" text-anchor="middle">Balasubramanyam</text>
+        </g>
+
+        <g transform="translate(1028,100)">
+          <rect id="S-229" class="room" width="88" height="90" rx="8"/>
+          <text x="44" y="38" class="room-label small" text-anchor="middle">S-229</text>
+          <text x="44" y="62" class="room-sub tiny" text-anchor="middle">Sateesh Kumar</text>
+        </g>
+      </g>
+
+      <!-- ========== BOTTOM ROW (already fits) ========== -->
+      <g id="bottomRow">
+        <g transform="translate(80,520)">
+          <rect id="S-204" class="room" width="110" height="90" rx="8"/>
+          <text x="55" y="35" class="room-label small" text-anchor="middle">S-204</text>
+          <text x="55" y="60" class="room-sub tiny" text-anchor="middle">Server Lab</text>
+        </g>
+
+        <g transform="translate(190,520)">
+          <rect id="S-206" class="room" width="130" height="90" rx="8"/>
+          <text x="65" y="35" class="room-label small" text-anchor="middle">S-206</text>
+          <text x="65" y="60" class="room-sub tiny" text-anchor="middle">Special Manpower</text>
+        </g>
+
+        <g transform="translate(320,520)">
+          <rect id="S-208" class="room" width="95" height="90" rx="8"/>
+          <text x="47" y="35" class="room-label small" text-anchor="middle">S-208</text>
+          <text x="47" y="60" class="room-sub tiny" text-anchor="middle">Standards Lab</text>
+        </g>
+
+        <g transform="translate(415,520)">
+          <rect id="S-210A" class="room" width="95" height="90" rx="8"/>
+          <text x="47" y="35" class="room-label small" text-anchor="middle">S-210A</text>
+          <text x="47" y="60" class="room-sub tiny" text-anchor="middle">Characterisation</text>
+        </g>
+
+        <g transform="translate(510,520)">
+          <rect id="S-210" class="room" width="95" height="90" rx="8"/>
+          <text x="47" y="35" class="room-label small" text-anchor="middle">S-210</text>
+          <text x="47" y="60" class="room-sub tiny" text-anchor="middle">Solid State Device</text>
+        </g>
+
+        <g transform="translate(605,520)">
+          <rect id="S-212" class="room" width="95" height="90" rx="8"/>
+          <text x="47" y="35" class="room-label small" text-anchor="middle">S-212</text>
+          <text x="47" y="60" class="room-sub tiny" text-anchor="middle">Parimal Lab</text>
+        </g>
+
+        <g transform="translate(700,520)">
+          <rect id="S-214" class="room" width="95" height="90" rx="8"/>
+          <text x="47" y="35" class="room-label small" text-anchor="middle">S-214</text>
+          <text x="47" y="60" class="room-sub tiny" text-anchor="middle">IoT Lab</text>
+        </g>
+
+        <g transform="translate(795,520)">
+          <rect id="S-213B" class="room" width="95" height="90" rx="8"/>
+          <text x="47" y="35" class="room-label small" text-anchor="middle">S-213</text>
+          <text x="47" y="60" class="room-sub tiny" text-anchor="middle">Machine Vision</text>
+        </g>
+
+        <g transform="translate(890,520)">
+          <rect id="S-215B" class="room" width="230" height="90" rx="8"/>
+          <text x="115" y="35" class="room-label small" text-anchor="middle">S-215</text>
+          <text x="115" y="60" class="room-sub tiny" text-anchor="middle">High Performance Lab</text>
+        </g>
+      </g>
+
+      <!-- Pointer -->
+      <g id="pointer" class="pointer" visibility="hidden">
+        <circle r="10" cx="0" cy="0" class="pointer-core"/>
+        <circle r="20" cx="0" cy="0" class="pointer-pulse"/>
+      </g>
+    </svg>
+  </main>
+
+  <footer class="app-footer">
+    <span>Tip: Try searching any room number or professor/lab name.</span>
+  </footer>
+
+  <script src="map_script.js"></script>
+</body>
+</html>

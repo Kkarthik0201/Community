@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ECE Department Map</title>
+  <link rel="stylesheet" href="map_style.css">
+</head>
+<body>
+  <header class="app-header">
+    <h1 class="app-title">ECE Department Map</h1>
+    <div class="search-wrap" role="search">
+      <input id="roomSearch" class="search-input" type="text" placeholder="Search room number or name (e.g., S-104, Signal Processing)" aria-label="Search rooms">
+      <ul id="suggestions" class="suggestions" role="listbox" aria-label="Search suggestions"></ul>
+    </div>
+  </header>
+
+  <main class="map-container">
+    <!-- Simplified schematic map based on provided sketch -->
+    <svg id="eceMap" class="ece-map" viewBox="0 0 1200 700" xmlns="http://www.w3.org/2000/svg" aria-labelledby="mapTitle mapDesc" role="img">
+      <title id="mapTitle">ECE Department Schematic Map</title>
+      <desc id="mapDesc">Rooms are labeled; search to highlight a room. Layout approximates the provided sketch.</desc>
+
+      <!-- Corridor backbone (invisible helper) -->
+      <rect x="60" y="40" width="1080" height="620" fill="none" stroke="var(--grid)" stroke-dasharray="4 6" opacity="0.3"/>
+
+      <!-- Bottom row: three larger rooms laid out horizontally -->
+      <g id="bottomRow">
+        <!-- Aligned to match top row span: start x=100, end x=1110 (total 1010px) -->
+        <rect id="S-104" class="room" x="100" y="440" width="340" height="110" rx="6" data-name="Signal Processing"/>
+        <text x="115" y="475" class="room-label">S-104</text>
+        <text x="115" y="505" class="room-sub">Signal Processing</text>
+
+        <rect id="Under-Construction" class="room room-muted" x="440" y="440" width="330" height="110" rx="6" data-name="Under Construction"/>
+        <text x="485" y="475" class="room-label">Under Construction</text>
+
+        <rect id="S-128" class="room" x="770" y="440" width="340" height="110" rx="6" data-name="Jio 5G Innovation Lab; SDR Lab"/>
+        <text x="785" y="475" class="room-label">S-128</text>
+        <text x="785" y="505" class="room-sub">Jio 5G Innovation Lab</text>
+        <text x="785" y="530" class="room-sub">SDR Lab</text>
+      </g>
+
+      <!-- Right block - two vertical stacks of smaller rooms -->
+      <!-- Unified horizontal row of small rooms S-110 ... S-131 (contiguous, no gaps) -->
+      <g id="roomsRow">
+        <!-- 11 small boxes, equal height, aligned y=140, h=60, w=90, gap=0 -->
+        <rect id="S-110" class="room" x="100" y="140" width="90" height="60" rx="6" data-name="Anshul Jaiswal"/>
+        <text x="145" y="166" class="room-label small" text-anchor="middle">S-110</text>
+        <text x="145" y="182" class="room-sub tiny" text-anchor="middle">Anshul Jaiswal</text>
+
+        <rect id="S-109" class="room" x="190" y="140" width="90" height="60" rx="6" data-name="Brijesh Kumar"/>
+        <text x="235" y="166" class="room-label small" text-anchor="middle">S-109</text>
+        <text x="235" y="182" class="room-sub tiny" text-anchor="middle">Brijesh Kumar</text>
+
+        <rect id="S-111" class="room" x="280" y="140" width="90" height="60" rx="6" data-name="Debashish Gash"/>
+        <text x="325" y="166" class="room-label small" text-anchor="middle">S-111</text>
+        <text x="325" y="182" class="room-sub tiny" text-anchor="middle">Debashish Gash</text>
+
+        <rect id="S-113" class="room" x="370" y="140" width="90" height="60" rx="6" data-name="Meenakshi Rawat"/>
+        <text x="415" y="166" class="room-label small" text-anchor="middle">S-113</text>
+        <text x="415" y="182" class="room-sub tiny" text-anchor="middle">Meenakshi Rawat</text>
+
+        <rect id="S-115" class="room" x="460" y="140" width="90" height="60" rx="6" data-name="Pyari Mohan Pradhan"/>
+        <text x="505" y="166" class="room-label small" text-anchor="middle">S-115</text>
+        <text x="505" y="182" class="room-sub tiny" text-anchor="middle">Pyari Mohan Pradhan</text>
+
+        <rect id="S-117" class="room" x="550" y="140" width="90" height="60" rx="6" data-name="Tharun Kumar Reddy"/>
+        <text x="595" y="166" class="room-label small" text-anchor="middle">S-117</text>
+        <text x="595" y="182" class="room-sub tiny" text-anchor="middle">Tharun Kumar Reddy</text>
+
+        <rect id="S-123" class="room" x="640" y="140" width="90" height="60" rx="6" data-name="Rajat Sadhukhan"/>
+        <text x="685" y="166" class="room-label small" text-anchor="middle">S-123</text>
+        <text x="685" y="182" class="room-sub tiny" text-anchor="middle">Rajat Sadhukhan</text>
+
+        <rect id="S-121" class="room" x="750" y="140" width="90" height="60" rx="6" data-name="Bishnu Prasad Das"/>
+        <text x="795" y="166" class="room-label small" text-anchor="middle">S-121</text>
+        <text x="795" y="182" class="room-sub tiny" text-anchor="middle">Bishnu Prasad Das</text>
+
+        <rect id="S-129" class="room" x="840" y="140" width="90" height="60" rx="6" data-name="Dharmendra Singh"/>
+        <text x="885" y="166" class="room-label small" text-anchor="middle">S-129</text>
+        <text x="885" y="182" class="room-sub tiny" text-anchor="middle">Dharmendra Singh</text>
+
+        <rect id="S-127" class="room" x="930" y="140" width="90" height="60" rx="6" data-name="Anshul Jaggi"/>
+        <text x="975" y="166" class="room-label small" text-anchor="middle">S-127</text>
+        <text x="975" y="182" class="room-sub tiny" text-anchor="middle">Anshul Jaggi</text>
+
+        <rect id="S-131" class="room" x="1020" y="140" width="90" height="60" rx="6" data-name="Chetan Gupta"/>
+        <text x="1065" y="166" class="room-label small" text-anchor="middle">S-131</text>
+        <text x="1065" y="182" class="room-sub tiny" text-anchor="middle">Chetan Gupta</text>
+      </g>
+
+      <!-- Pointer marker (positioned dynamically) -->
+      <g id="pointer" class="pointer" visibility="hidden">
+        <circle r="10" cx="0" cy="0" class="pointer-core"/>
+        <circle r="20" cx="0" cy="0" class="pointer-pulse"/>
+      </g>
+    </svg>
+  </main>
+
+  <footer class="app-footer">
+    <span>Tip: Try searching "S-104", "Signal Processing", or "Jio 5G".</span>
+  </footer>
+
+  <script src="map_script.js"></script>
+</body>
+</html>
+
+

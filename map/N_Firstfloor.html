@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ECE Department – North Block 1st Floor</title>
+  <link rel="stylesheet" href="map_style.css">
+</head>
+<body>
+  <header class="app-header">
+    <h1 class="app-title">ECE Department – North Block 1st Floor</h1>
+    <div class="search-wrap" role="search">
+      <input id="roomSearch" class="search-input" type="text"
+             placeholder="Search (e.g., N-211, Vinod, RFIC)"
+             aria-label="Search rooms">
+      <ul id="suggestions" class="suggestions" role="listbox" aria-label="Search suggestions"></ul>
+    </div>
+  </header>
+
+  <main class="map-container">
+    <svg id="eceMap" class="ece-map" viewBox="0 0 1200 700"
+         xmlns="http://www.w3.org/2000/svg" aria-labelledby="mapTitle mapDesc" role="img">
+      <title id="mapTitle">ECE North Block 1st Floor Map</title>
+      <desc id="mapDesc">Searchable schematic showing faculty and laboratories on the first floor.</desc>
+
+      <!-- Outer boundary -->
+      <rect x="60" y="40" width="1080" height="620"
+            fill="none" stroke="var(--grid)" stroke-dasharray="4 6" opacity="0.3"/>
+
+      <!-- Corridor -->
+      <rect x="80" y="350" width="1040" height="40"
+            fill="rgba(56,189,248,0.05)" stroke="var(--grid)"
+            stroke-dasharray="3 5" opacity="0.6"/>
+
+      <!-- ===== TOP ROW ===== -->
+      <g id="topRow">
+        <rect id="N-201" class="room" x="80" y="100" width="95" height="90" rx="8" data-name="Karun Rawat"/>
+        <text x="128" y="130" class="room-label small" text-anchor="middle">N-201</text>
+        <text x="128" y="155" class="room-sub tiny" text-anchor="middle">Karun Rawat</text>
+
+        <rect id="N-203" class="room" x="175" y="100" width="95" height="90" rx="8" data-name="A. Patnaik"/>
+        <text x="223" y="130" class="room-label small" text-anchor="middle">N-203</text>
+        <text x="223" y="155" class="room-sub tiny" text-anchor="middle">A. Patnaik</text>
+
+        <rect id="N-205" class="room" x="270" y="100" width="100" height="90" rx="8" data-name="Vishwendra Singh Puniya"/>
+        <text x="320" y="130" class="room-label small" text-anchor="middle">N-205</text>
+        <text x="320" y="155" class="room-sub tiny" text-anchor="middle">Vishwendra S. Puniya</text>
+
+        <!-- Small space -->
+        <rect x="370" y="100" width="20" height="90" fill="none"/>
+
+        <rect id="N-207" class="room" x="390" y="100" width="95" height="90" rx="8" data-name="Sanjeev Manhas"/>
+        <text x="438" y="130" class="room-label small" text-anchor="middle">N-207</text>
+        <text x="438" y="155" class="room-sub tiny" text-anchor="middle">Sanjeev Manhas</text>
+
+        <rect id="N-209" class="room" x="485" y="100" width="95" height="90" rx="8" data-name="Durga Toshinwala"/>
+        <text x="533" y="130" class="room-label small" text-anchor="middle">N-209</text>
+        <text x="533" y="155" class="room-sub tiny" text-anchor="middle">Durga Toshinwala</text>
+
+        <rect id="N-211" class="room" x="580" y="100" width="95" height="90" rx="8" data-name="Vinod Pankajakshan"/>
+        <text x="628" y="130" class="room-label small" text-anchor="middle">N-211</text>
+        <text x="628" y="155" class="room-sub tiny" text-anchor="middle">Vinod Pankajakshan</text>
+
+        <rect id="N-213" class="room" x="675" y="100" width="95" height="90" rx="8" data-name="Rajib K. Onigsahi"/>
+        <text x="723" y="130" class="room-label small" text-anchor="middle">N-213</text>
+        <text x="723" y="155" class="room-sub tiny" text-anchor="middle">Rajib K. Onigsahi</text>
+
+        <rect id="N-215" class="room" x="770" y="100" width="95" height="90" rx="8" data-name="Arnab Datta"/>
+        <text x="818" y="130" class="room-label small" text-anchor="middle">N-215</text>
+        <text x="818" y="155" class="room-sub tiny" text-anchor="middle">Arnab Datta</text>
+
+        <rect id="N-217" class="room" x="865" y="100" width="95" height="90" rx="8" data-name="Nagendra P. Pathak"/>
+        <text x="913" y="130" class="room-label small" text-anchor="middle">N-217</text>
+        <text x="913" y="155" class="room-sub tiny" text-anchor="middle">Nagendra P. Pathak</text>
+
+        <rect id="N-219" class="room" x="960" y="100" width="160" height="90" rx="8" data-name=""/>
+        <text x="1040" y="135" class="room-label small" text-anchor="middle">N-219</text>
+      </g>
+
+      <!-- ===== BOTTOM ROW ===== -->
+      <g id="bottomRow">
+        <rect id="N-202" class="room" x="80" y="520" width="210" height="90" rx="8" data-name="Millimeter Tz Wave Laboratory"/>
+        <text x="185" y="550" class="room-label small" text-anchor="middle">N-202</text>
+        <text x="185" y="575" class="room-sub tiny" text-anchor="middle">Millimeter Tz Wave Lab</text>
+
+        <rect id="Stairs" class="room" x="290" y="520" width="90" height="90" rx="8" fill="#1a1a1a" data-name="Stairs"/>
+        <text x="335" y="565" class="room-label small" text-anchor="middle">Stairs</text>
+
+        <rect id="N-206" class="room" x="380" y="520" width="220" height="90" rx="8" data-name="Non Linear Vector Network Analyzer Facility"/>
+        <text x="490" y="550" class="room-label small" text-anchor="middle">N-206</text>
+        <text x="490" y="575" class="room-sub tiny" text-anchor="middle">Non Linear VNA Facility</text>
+
+        <rect id="N-208" class="room" x="600" y="520" width="170" height="90" rx="8" data-name="Wireless Communication Laboratory"/>
+        <text x="685" y="550" class="room-label small" text-anchor="middle">N-208</text>
+        <text x="685" y="575" class="room-sub tiny" text-anchor="middle">Wireless Comm. Lab</text>
+
+        <rect id="N-210" class="room" x="770" y="520" width="170" height="90" rx="8" data-name="RFIC Laboratory"/>
+        <text x="855" y="550" class="room-label small" text-anchor="middle">N-210</text>
+        <text x="855" y="575" class="room-sub tiny" text-anchor="middle">RFIC Laboratory</text>
+
+        <rect id="N-212" class="room" x="940" y="520" width="180" height="90" rx="8" data-name="Data Mining Laboratory"/>
+        <text x="1030" y="550" class="room-label small" text-anchor="middle">N-212</text>
+        <text x="1030" y="575" class="room-sub tiny" text-anchor="middle">Data Mining Lab</text>
+      </g>
+
+      <!-- Pointer -->
+      <g id="pointer" class="pointer" visibility="hidden">
+        <circle r="10" cx="0" cy="0" class="pointer-core"/>
+        <circle r="20" cx="0" cy="0" class="pointer-pulse"/>
+      </g>
+    </svg>
+  </main>
+
+  <footer class="app-footer">
+    <span>Tip: Try searching “N-211”, “Vinod”, or “RFIC”.</span>
+  </footer>
+
+  <script src="map_script.js"></script>
+</body>
+</html>

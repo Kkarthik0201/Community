@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ECE Department – North Block Ground Floor</title>
+  <link rel="stylesheet" href="map_style.css">
+</head>
+<body>
+  <header class="app-header">
+    <h1 class="app-title">ECE Department – North Block Ground Floor</h1>
+    <div class="search-wrap" role="search">
+      <input id="roomSearch" class="search-input" type="text"
+             placeholder="Search room number or name (e.g., N-111, Sudeb Das Gupta, VLSI)"
+             aria-label="Search rooms">
+      <ul id="suggestions" class="suggestions" role="listbox" aria-label="Search suggestions"></ul>
+    </div>
+  </header>
+
+  <main class="map-container">
+    <svg id="eceMap" class="ece-map" viewBox="0 0 1200 700" xmlns="http://www.w3.org/2000/svg"
+         aria-labelledby="mapTitle mapDesc" role="img">
+      <title id="mapTitle">ECE North Block Ground Floor Map</title>
+      <desc id="mapDesc">Searchable schematic showing faculty and lab rooms on the ground floor.</desc>
+
+      <!-- Outer boundary -->
+      <rect x="60" y="40" width="1080" height="620"
+            fill="none" stroke="var(--grid)" stroke-dasharray="4 6" opacity="0.3"/>
+
+      <!-- Corridor -->
+      <rect x="80" y="350" width="1040" height="40"
+            fill="rgba(56,189,248,0.05)" stroke="var(--grid)"
+            stroke-dasharray="3 5" opacity="0.6"/>
+
+      <!-- ===== TOP ROW ===== -->
+      <g id="topRow">
+        <rect id="N-101" class="room" x="80" y="100" width="100" height="90" rx="8" data-name=""/>
+        <text x="130" y="135" class="room-label small" text-anchor="middle">N-101</text>
+
+        <rect id="N-103" class="room" x="180" y="100" width="110" height="90" rx="8" data-name=""/>
+        <text x="235" y="135" class="room-label small" text-anchor="middle">N-103</text>
+
+        <rect id="Exit" class="room" x="290" y="100" width="90" height="90" rx="8" fill="#1a1a1a" data-name="Exit"/>
+        <text x="335" y="145" class="room-label small" text-anchor="middle">Exit</text>
+
+        <rect id="ECE-HOD" class="room" x="380" y="100" width="140" height="90" rx="8" data-name="Head of Department"/>
+        <text x="450" y="135" class="room-label small" text-anchor="middle">ECE HOD</text>
+
+        <rect id="N-111" class="room" x="520" y="100" width="130" height="90" rx="8" data-name="Sudeb Das Gupta"/>
+        <text x="585" y="130" class="room-label small" text-anchor="middle">N-111</text>
+        <text x="585" y="155" class="room-sub tiny" text-anchor="middle">Sudeb Das Gupta</text>
+
+        <rect id="N-113" class="room" x="650" y="100" width="130" height="90" rx="8" data-name="Anand Bulusu"/>
+        <text x="715" y="130" class="room-label small" text-anchor="middle">N-113</text>
+        <text x="715" y="155" class="room-sub tiny" text-anchor="middle">Anand Bulusu</text>
+
+        <rect id="N-115" class="room" x="780" y="100" width="340" height="90" rx="8" data-name=""/>
+        <text x="950" y="135" class="room-label small" text-anchor="middle">N-115</text>
+      </g>
+
+      <!-- ===== BOTTOM ROW ===== -->
+      <g id="bottomRow">
+        <rect id="N-102" class="room" x="80" y="520" width="140" height="90" rx="8"
+              data-name="ECE DAPC Office"/>
+        <text x="150" y="550" class="room-label small" text-anchor="middle">N-102</text>
+        <text x="150" y="575" class="room-sub tiny" text-anchor="middle">ECE DAPC Office</text>
+
+        <rect id="CSE-DAPC" class="room" x="220" y="520" width="160" height="90" rx="8"
+              data-name="CSE DAPC Office"/>
+        <text x="300" y="550" class="room-label small" text-anchor="middle">CSE DAPC</text>
+
+        <rect id="Stairs" class="room" x="380" y="520" width="90" height="90" rx="8"
+              fill="#1a1a1a" data-name="Stairs"/>
+        <text x="425" y="565" class="room-label small" text-anchor="middle">Stairs</text>
+
+        <rect id="N-108" class="room" x="470" y="520" width="340" height="90" rx="8"
+              data-name="PEVC and Surface Profilometer Facilities"/>
+        <text x="640" y="550" class="room-label small" text-anchor="middle">N-108</text>
+        <text x="640" y="575" class="room-sub tiny" text-anchor="middle">PEVC & Surface Profilometer</text>
+
+        <rect id="N-110" class="room" x="810" y="520" width="310" height="90" rx="8"
+              data-name="VLSI Design Laboratory"/>
+        <text x="965" y="550" class="room-label small" text-anchor="middle">N-110</text>
+        <text x="965" y="575" class="room-sub tiny" text-anchor="middle">VLSI Design Laboratory</text>
+      </g>
+
+      <!-- Pointer -->
+      <g id="pointer" class="pointer" visibility="hidden">
+        <circle r="10" cx="0" cy="0" class="pointer-core"/>
+        <circle r="20" cx="0" cy="0" class="pointer-pulse"/>
+      </g>
+    </svg>
+  </main>
+
+  <footer class="app-footer">
+    <span>Tip: Try searching “N-111”, “Sudeb Das Gupta”, or “VLSI”.</span>
+  </footer>
+
+  <script src="map_script.js"></script>
+</body>
+</html>
