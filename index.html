@@ -1,332 +1,79 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>IIT Roorkee Departments - Professors Directory</title>
-  <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>IIT Roorkee - ECE Department</title>
+
   <!-- Font Awesome for icons -->
-  <link
-    rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
-  />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
 
-  <style>
-    /* Floor controls and block UI */
-    .map-selector {
-      position: absolute;
-      top: 100px;
-      left: 50%;
-      transform: translateX(-50%);
-      background: rgba(10, 20, 40, 0.95);
-      border-radius: 12px;
-      padding: 25px 40px;
-      box-shadow: 0 0 20px rgba(0, 183, 255, 0.4);
-      text-align: center;
-      color: white;
-    }
-    .block-buttons button {
-      background: #00b7ff;
-      border: none;
-      border-radius: 8px;
-      padding: 10px 18px;
-      margin: 8px;
-      font-weight: bold;
-      color: white;
-      cursor: pointer;
-      transition: background 0.3s;
-    }
-    .block-buttons button:hover { background: #00d5ff; }
-
-    .floor-controls {
-      position: absolute;
-      top: 15px;
-      right: 25px;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      background: rgba(0, 0, 0, 0.4);
-      padding: 8px 14px;
-      border-radius: 10px;
-      color: white;
-      font-weight: bold;
-    }
-    .floor-controls button {
-      background: #00b7ff;
-      border: none;
-      border-radius: 6px;
-      color: white;
-      font-size: 18px;
-      font-weight: bold;
-      width: 28px;
-      height: 28px;
-      cursor: pointer;
-    }
-    .floor-controls button:hover { background: #00d5ff; }
-
-    /* === Professor cards (enhanced) === */
-    .prof-grid-container {
-      width: 100vw;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      margin-top: 120px;
-    }
-
-    .prof-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 45px;
-      width: 90%;
-      max-width: 1400px;
-      margin-top: 40px;
-    }
-
-    .prof-card {
-      background: #102538;
-      border-radius: 15px;
-      box-shadow: 0 0 20px rgba(0, 183, 255, 0.3);
-      padding: 35px 25px;
-      text-align: left;
-      transition: all 0.3s;
-      min-height: 230px;
-    }
-    .prof-card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 0 30px rgba(0, 183, 255, 0.5);
-    }
-
-    .prof-card h4 {
-      margin: 0;
-      font-size: 22px;
-      color: #FFFFFF; /* Changed from #00b7ff (blue) to white */
-      font-weight: bold;
-    }
-    .card-info {
-      color: #d0d8e5;
-      font-size: 17px;
-      margin-top: 8px;
-      font-weight: 500;
-    }
-
-    .info-line {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      color: #e2e8f0;
-      font-size: 17.5px; /* Increased text size */
-      margin-top: 14px;
-      line-height: 1.7;
-      word-break: break-word;
-    }
-    .info-line i {
-      color: #00b7ff;
-      font-size: 19px;
-      width: 22px;
-      text-align: center;
-    }
-
-    .prof-card button {
-      margin-top: 22px;
-      background: #00b7ff;
-      color: white;
-      border: none;
-      padding: 10px 20px;
-      border-radius: 8px;
-      font-size: 16px;
-      cursor: pointer;
-      transition: background 0.3s;
-    }
-    .prof-card button:hover {
-      background: #00d5ff;
-    }
-
-    @media (max-width: 1024px) {
-      .prof-grid {
-        grid-template-columns: repeat(2, 1fr);
-      }
-    }
-
-    @media (max-width: 700px) {
-      .prof-grid {
-        grid-template-columns: repeat(1, 1fr);
-      }
-    }
-  </style>
+  <!-- Single consolidated CSS -->
+  <link rel="stylesheet" href="style.css" />
 </head>
 
-<body onload="goHome()">
+<body>
 
-  <!-- HEADER -->
   <header>
-    <span>IIT Roorkee</span>
+    <span>IIT Roorkee - ECE</span>
     <nav class="menu-bar">
-      <a id="homeLink" class="active" onclick="goHome()">Home</a>
-      <a id="departmentsLink" onclick="showDepartmentsPopup(event)">Departments</a>
-      <a id="aboutLink" onclick="showAbout()">About</a>
+      <a id="homeLink" class="active" onclick="showHome()">Home</a>
+      <a id="professorsLink" onclick="showProfessors()">Professors</a>
+      <a id="laboratoriesLink" onclick="showLaboratories()">Laboratories</a>
+      <a id="mapLink" onclick="showMap()">Map</a>
     </nav>
   </header>
 
-  <!-- HOME SECTION -->
-  <div id="homeSection" class="home-section" style="display:none;">
-    <div class="slideshow-container" style="max-width:1200px; height:550px;">
-      <div class="slide active-slide">
-        <div style="display:grid; grid-template-columns:500px 1fr; align-items:center; height:550px; background:#071724; border-radius:20px; padding:0 80px;">
-          <img src="cse.jpg" alt="CSE" style="width:480px; height:480px; border-radius:20px; object-fit:cover;">
-          <div style="text-align:left; padding-left:20px;">
-            <h2 style="color:#00aaff; font-size:36px;">Computer Science & Engineering</h2>
-            <p style="max-width:500px; font-size:18px; color:#b0c7e0;">Artificial Intelligence, Data Science, Systems Research.</p>
-          </div>
-        </div>
+  <!-- HOME -->
+  <div id="homeSection" class="home-section">
+    <div class="home-content">
+      <img src="ece.jpg" alt="ECE Department"
+           onerror="this.src='https://via.placeholder.com/480x480/071724/00aaff?text=ECE+Department'">
+      <div class="home-text">
+        <h2>Electronics & Communication Engineering</h2>
+        <p>Explore cutting-edge research in VLSI Design, Communication Systems, Signal Processing, and more. Our department is dedicated to advancing technology and fostering innovation in the field of electronics and communication.</p>
       </div>
-
-      <div class="slide">
-        <div style="display:grid; grid-template-columns:480px 1fr; align-items:center; height:550px; background:#071724; border-radius:20px; padding:0 80px;">
-          <img src="ece.jpg" alt="ECE" style="width:420px; height:420px; border-radius:20px; object-fit:cover;">
-          <div style="text-align:left; padding-left:40px;">
-            <h2 style="color:#00aaff; font-size:36px;">Electronics & Communication Engineering</h2>
-            <p style="max-width:520px; font-size:18px; color:#b0c7e0;">VLSI Design, Communication Systems, and Signal Processing.</p>
-          </div>
-        </div>
-      </div>
-
-      <div class="slide">
-        <div style="display:grid; grid-template-columns:500px 1fr; align-items:center; height:550px; background:#071724; border-radius:20px; padding:0 80px;">
-          <img src="ee.jpg" alt="EE" style="width:480px; height:480px; border-radius:20px; object-fit:cover;">
-          <div style="text-align:left; padding-left:20px;">
-            <h2 style="color:#00aaff; font-size:36px;">Electrical Engineering</h2>
-            <p style="max-width:500px; font-size:18px; color:#b0c7e0;">Power Systems, Control, Renewable Energy.</p>
-          </div>
-        </div>
-      </div>
-
-      <a class="prev" onclick="changeSlide(-1)">&#10094;</a>
-      <a class="next" onclick="changeSlide(1)">&#10095;</a>
     </div>
   </div>
 
-  <!-- MAP SECTION -->
+  <!-- PROFESSORS -->
+  <div id="professorsSection" class="prof-section" style="display:none;">
+    <h2 class="section-title">Our Professors</h2>
+    <div class="search-container">
+      <input type="text" id="profSearch" placeholder="Search professors by name, email, room..." oninput="searchProfessors()">
+    </div>
+    <div id="profGrid" class="prof-grid"></div>
+  </div>
+
+  <!-- LABS -->
+  <div id="laboratoriesSection" class="lab-section" style="display:none;">
+    <h2 class="section-title">Our Laboratories</h2>
+    <div class="search-container">
+      <input type="text" id="labSearch" placeholder="Search laboratories by name or room..." oninput="searchLaboratories()">
+    </div>
+    <div id="labGrid" class="lab-grid"></div>
+  </div>
+
+  <!-- MAP -->
   <div id="mapSection" class="map-container" style="display:none;">
     <div class="map-selector" id="blockSelector">
-     
+      <h3>Select Block</h3>
       <div class="block-buttons">
         <button onclick="openBlock('south')">South Block</button>
         <button onclick="openBlock('north')">North Block</button>
-        <button onclick="openBlock('west')">West Block</button>
       </div>
     </div>
 
     <div id="floorControls" class="floor-controls" style="display:none;">
       <button onclick="changeFloor(-1)">−</button>
-      <span id="floorLabel">Floor: 0</span>
+      <span id="floorLabel">Floor: Ground</span>
       <button onclick="changeFloor(1)">+</button>
     </div>
 
     <iframe id="deptMapFrame" src="" style="width:100%; height:100%; border:none; display:none;"></iframe>
   </div>
 
-  
-  <div id="mainContent" style="display:none;"></div>
-
-  
-  <div id="popupDept" class="popup" style="display:none;">
-    <ul id="deptListUL"></ul>
-  </div>
-
-  <div id="popupVertical" class="vertical-popup">
-    <ul>
-      <li onclick="showProfessors()">Professors</li>
-      <li onclick="showLaboratories()">Laboratories</li>
-      <li onclick="showMap()">Map</li>
-    </ul>
-  </div>
-
+  <!-- Your JS (kept as before) -->
   <script src="index.js"></script>
-
-  <script>
-    // renderProfGrid with larger fonts
-    function renderProfGrid(query) {
-      let profArr = profs[selectedDept] || [];
-      let cards = "";
-
-      profArr.forEach(p => {
-        let txt = (
-          p.name + " " +
-          (p.designation || "") + " " +
-          p.email + " " +
-          (p.phone || "") + " " +
-          (p.room || "")
-        ).toLowerCase();
-
-        if (!query || txt.includes(query)) {
-          cards += `
-          <div class="prof-card">
-            <h4>${p.name}</h4>
-            <div class="card-info">${p.designation || "Professor"}</div>
-
-            <div class="info-line">
-              <i class="fa-solid fa-envelope"></i> ${p.email}
-            </div>
-            <div class="info-line">
-              <i class="fa-solid fa-location-dot"></i> ${p.room || "N/A"}
-            </div>
-            <div class="info-line">
-              <i class="fa-solid fa-phone"></i> ${p.phone || "N/A"}
-            </div>
-
-            ${p.room && p.room !== "N/A"
-              ? `<button onclick="showMap('${p.room}')">Show on Map</button>`
-              : ""}
-          </div>`;
-        }
-      });
-
-      document.getElementById("profGrid").innerHTML =
-        cards || "<p style='color:white; text-align:center;'>No results found.</p>";
-    }
-
-    // Multi-floor map system (unchanged)
-    let currentBlock = "";
-    let currentFloor = 0;
-    const maxFloors = 2;
-
-    function openBlock(blockName) {
-      currentBlock = blockName;
-      currentFloor = 0;
-      document.getElementById("blockSelector").style.display = "none";
-      document.getElementById("deptMapFrame").style.display = "block";
-      document.getElementById("floorControls").style.display = "flex";
-      loadFloor();
-    }
-
-    function loadFloor() {
-      const iframe = document.getElementById("deptMapFrame");
-      const label = document.getElementById("floorLabel");
-      let filePath = "";
-
-      if (currentBlock === "south") {
-        if (currentFloor === 0) filePath = "map/map.html";
-        else if (currentFloor === 1) filePath = "map/first_floor.html";
-        else if (currentFloor === 2) filePath = "map/second_floor.html";
-      } else if (currentBlock === "north") {
-        if (currentFloor === 0) filePath = "map/map.html";
-        else if (currentFloor === 1) filePath = "map/first_floor.html";
-        else if (currentFloor === 2) filePath = "map/second_floor.html";
-      } else if (currentBlock === "west") {
-        if (currentFloor === 0) filePath = "map/map.html";
-        else if (currentFloor === 1) filePath = "map/first_floor.html";
-        else if (currentFloor === 2) filePath = "map/second_floor.html";
-      }
-
-      iframe.src = filePath;
-      label.textContent = `Floor: ${currentFloor}`;
-    }
-
-    function changeFloor(dir) {
-      const next = currentFloor + dir;
-      if (next < 0 || next > 2) return;
-      currentFloor = next;
-      loadFloor();
-    }
-  </script>
 </body>
 </html>
