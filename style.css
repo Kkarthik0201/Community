@@ -32,7 +32,8 @@ header {
   font-weight: bold;
   letter-spacing: 0.9px;
   z-index: 1000;
-  box-shadow: 0 4px 15px rgba(0,183,255,0.3);
+  /* Removed: box-shadow: 0 4px 15px rgba(0,183,255,0.3); */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4); /* Replaced with a subtle dark shadow */
   border-bottom: 1px solid rgba(43,43,43,0.6);
 }
 
@@ -84,7 +85,8 @@ header span {
   background: #071724;
   border-radius: 20px;
   padding: 60px 80px;
-  box-shadow: 0 0 30px rgba(0,183,255,0.22);
+  /* Removed: box-shadow: 0 0 30px rgba(0,183,255,0.22); */
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.5); /* Replaced with a subtle dark shadow */
   gap: 40px;
 }
 .home-content img {
@@ -147,7 +149,8 @@ header span {
 .prof-card {
   background: #102538;
   border-radius: 15px;
-  box-shadow: 0 0 20px rgba(0,183,255,0.3);
+  /* Removed: box-shadow: 0 0 20px rgba(0,183,255,0.3); */
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5); /* Replaced with a subtle dark shadow */
   padding: 35px 25px;
   text-align: left;
   transition: transform 0.3s, box-shadow 0.3s;
@@ -155,7 +158,8 @@ header span {
 }
 .prof-card:hover {
   transform: translateY(-5px);
-  box-shadow: 0 0 30px rgba(0,183,255,0.5);
+  /* Removed: box-shadow: 0 0 30px rgba(0,183,255,0.5); */
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.7); /* Replaced with a stronger dark shadow */
 }
 .prof-card h4 {
   margin: 0;
@@ -200,13 +204,15 @@ header span {
 .lab-card {
   background: #102538;
   border-radius: 15px;
-  box-shadow: 0 0 20px rgba(0,183,255,0.3);
+  /* Removed: box-shadow: 0 0 20px rgba(0,183,255,0.3); */
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5); /* Replaced with a subtle dark shadow */
   padding: 30px;
   transition: transform 0.3s;
 }
 .lab-card:hover {
   transform: translateY(-5px);
-  box-shadow: 0 0 30px rgba(0,183,255,0.5);
+  /* Removed: box-shadow: 0 0 30px rgba(0,183,255,0.5); */
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.7); /* Replaced with a stronger dark shadow */
 }
 .lab-card h4 { color: #00b7ff; font-size: 22px; margin-bottom: 15px; }
 .lab-card .info-line { display:flex; gap:10px; color:#e2e8f0; font-size:15.5px; margin-top:10px; }
@@ -243,7 +249,8 @@ header span {
   background: rgba(10,20,40,0.95);
   border-radius: 12px;
   padding: 18px 28px;
-  box-shadow: 0 0 20px rgba(0,183,255,0.35);
+  /* Removed: box-shadow: 0 0 20px rgba(0,183,255,0.35); */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5); /* Replaced with a subtle dark shadow */
   text-align: center;
   color: #00b7ff;
   z-index: 50;
